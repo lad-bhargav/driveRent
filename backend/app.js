@@ -126,8 +126,17 @@ app.post("/profile/:id",async(req,res)=>{
 })
 
 // Create a new booking
-app.post("/booking",async(req,res)=>{
+app.post("/booking/:id",async(req,res)=>{
     try{
+        const {id} = req.params;
+        const car = await Cars.findById(id);
+        if(!car){
+            return res.status(404).json({message: "Car not found"});
+        }
+        const updatedCar = await Cars.findByIdAndUpdate(id,{
+            isBooked : true,
+        },{new : true});
+
         const {useremail,carname,carimg,price,model,useraddress,modelyear,userphNum,capacity,mop,avg} = req.body;
         const newBooking = new Booking({
             useremail,
@@ -140,7 +149,7 @@ app.post("/booking",async(req,res)=>{
             userphNum,
             capacity,
             mop,
-            avg
+            avg,
         });
         await newBooking.save();
         console.log(newBooking);

@@ -25,6 +25,10 @@ const Cardetails = new Schema({
     },
     avg : {
         type: String,
+    },
+    isBooked : {
+        type : Boolean,
+        default : false,
     }
 });
 
