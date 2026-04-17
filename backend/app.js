@@ -37,7 +37,7 @@ app.post("/sign-up",async(req,res)=>{
             });
             await newUser.save();
             console.log(newUser);
-            res.status(201).json({message: "user created"});
+            res.status(201).json({message: "usercreated"});
         } else {
             res.status(400).json({message: "Please fill in all fields"});
         }
