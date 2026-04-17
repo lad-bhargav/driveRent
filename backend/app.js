@@ -98,9 +98,7 @@ app.post("/profile",async(req,res)=>{
         const profile = await User.findOne({
             "email" : email,
         });
-        res.json({
-            "profile" : profile,
-        })
+        res.json(profile)
     }catch(err){
         res.status(500).json({error : err.message});
     }
@@ -171,6 +169,37 @@ app.post("/mybookings",async(req,res)=>{
         console.log(e);
         res.status(500).json({error : e.message});
     }
+});
+
+app.post("/cancelbooking/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { carname } = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    await Booking.findByIdAndDelete(id);
+    // find car safely
+    const car = await Cars.findOne({ name: carname });
+
+    if (car) {
+      await Cars.findByIdAndUpdate(car._id, {
+        isBooked: false,
+      });
+    }
+
+
+    res.json({
+      message: "Booking cancelled",
+    });
+
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ error: e.message });
+  }
 });
 
 app.listen(8080,()=>{

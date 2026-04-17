@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ car }) => {
+  const navigate = useNavigate();
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition">
 
@@ -44,8 +46,8 @@ const Card = ({ car }) => {
         <div className="mt-3 flex justify-between items-center text-xs text-gray-500 border-t pt-3">
           <span>⛽ {car.avg} km/l</span>
 
-          <button className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white text-xs px-4 py-1.5 rounded-lg transition">
-            Rent Now
+          <button className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white text-xs px-4 py-1.5 rounded-lg transition" onClick={()=>navigate(`/booking/${car._id}`)}>
+            visit
           </button>
         </div>
       </div>
