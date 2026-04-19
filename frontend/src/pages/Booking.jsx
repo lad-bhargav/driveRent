@@ -90,15 +90,15 @@ export default function Booking() {
           
           {/* Phone */}
           <input
-  type="tel"
-  name="userphNum"
-  placeholder="Enter phone number"
-  value={form.userphNum}
-  onChange={(e) =>
-    setForm({ ...form, userphNum: e.target.value })
-  }
-  className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-/>
+            type="tel"
+            name="userphNum"
+            placeholder="Enter phone number"
+            value={form.userphNum}
+            onChange={(e) =>
+              setForm({ ...form, userphNum: e.target.value })
+            }
+            className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
           {/* Address */}
           <textarea
